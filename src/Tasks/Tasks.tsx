@@ -22,16 +22,15 @@ export default class Tasks extends React.Component {
         }
     ]
 
-    getTaskList (tasks: TaskInterface[]): JSX.Element[] {
-        const task = tasks.map((task, index) => 
+    buildTaskList (tasks: TaskInterface[]): JSX.Element[] {
+        return tasks.map((task, index) => 
             <Task name={task.name} isComplete={task.isComplete} key={index}></Task>
         )
-        return task
     }
 
     completedTaskCount (): Number {
         return this.tasks.reduce((accumulator, currentValue) => {
-            if (currentValue.isComplete === true) {
+            if (currentValue.isComplete) {
                 return accumulator + 1;
             }
             return accumulator;
@@ -44,7 +43,7 @@ export default class Tasks extends React.Component {
                 <h1>Task list</h1>
                 <p>{this.completedTaskCount()} completed</p>
                 <ul>
-                    {this.getTaskList(this.tasks)}
+                    {this.buildTaskList(this.tasks)}
                 </ul>
             </div>
         )
