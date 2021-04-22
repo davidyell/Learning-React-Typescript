@@ -2,39 +2,57 @@ import React from 'react'
 import TaskInterface from './TaskInterface'
 import Task from './Task'
 
-export default class Tasks extends React.Component {
-    tasks: TaskInterface[] = [
-        {
-            name: 'Buy groceries',
-            isComplete: false
-        },
-        {
-            name: 'Feed fish',
-            isComplete: true
-        },
-        {
-            name: 'Mow the lawns',
-            isComplete: false
-        },
-        {
-            name: 'Collect mail',
-            isComplete: false
+interface TasksState {
+    tasks: TaskInterface[]
+}
+
+export default class Tasks extends React.Component<any, TasksState> {
+    constructor(props: null) {
+        super(props)
+
+        this.state = {
+            tasks: [
+                {
+                    name: 'Buy groceries',
+                    isComplete: false
+                },
+                {
+                    name: 'Feed fish',
+                    isComplete: true
+                },
+                {
+                    name: 'Mow the lawns',
+                    isComplete: false
+                },
+                {
+                    name: 'Collect mail',
+                    isComplete: false
+                }
+            ]
         }
-    ]
+
+        this.toggleTaskComplete = this.toggleTaskComplete.bind(this);
+    }
 
     buildTaskList (tasks: TaskInterface[]): JSX.Element[] {
         return tasks.map((task, index) => 
-            <Task name={task.name} isComplete={task.isComplete} key={index}></Task>
+            <Task task={task} onToggleComplete={this.toggleTaskComplete} index={index} key={index}></Task>
         )
     }
 
     completedTaskCount (): Number {
-        return this.tasks.reduce((accumulator, currentValue) => {
+        return this.state.tasks.reduce((accumulator, currentValue) => {
             if (currentValue.isComplete) {
                 return accumulator + 1;
             }
             return accumulator;
         }, 0)
+    }
+
+    toggleTaskComplete (index: number) {
+        this.setState(state => {
+            state.tasks[index].isComplete = !state.tasks[index].isComplete
+        })
     }
 
     render () {
@@ -43,7 +61,7 @@ export default class Tasks extends React.Component {
                 <h1>Task list</h1>
                 <p>{this.completedTaskCount()} completed</p>
                 <ul>
-                    {this.buildTaskList(this.tasks)}
+                    {this.buildTaskList(this.state.tasks)}
                 </ul>
             </div>
         )

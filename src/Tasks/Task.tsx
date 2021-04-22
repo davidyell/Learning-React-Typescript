@@ -1,16 +1,32 @@
 import React from 'react'
 import TaskInterface from './TaskInterface'
 
-export default class Task extends React.Component<TaskInterface> {
-    render (): JSX.Element {
-        return <li className="task">{this.complete(this.props.isComplete)} {this.props.name}</li>
+interface TaskProps {
+    task: TaskInterface,
+    onToggleComplete: Function,
+    index: Number
+}
+
+export default class Task extends React.Component<TaskProps> {
+    constructor(props: TaskProps) {
+        super(props);
+
+        this.toggleComplete = this.toggleComplete.bind(this);
     }
 
     complete (isComplete: boolean): JSX.Element {
         if (isComplete) {
-            return <span className="task-status complete">✔</span>
+            return <span className="task-status complete" onClick={this.toggleComplete()}>✔</span>
         }
 
-        return <span className="task-status incomplete">✘</span>
+        return <span className="task-status incomplete" onClick={this.toggleComplete()}>✘</span>
+    }
+
+    toggleComplete () {
+        return this.props.onToggleComplete(this.props.index)
+    }
+
+    render (): JSX.Element {
+        return <li className="task">{this.complete(this.props.task.isComplete)} {this.props.task.name}</li>
     }
 }
