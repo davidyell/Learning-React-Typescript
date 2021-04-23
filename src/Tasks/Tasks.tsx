@@ -35,8 +35,8 @@ export default class Tasks extends React.Component<any, TasksState> {
     }
 
     buildTaskList (tasks: TaskInterface[]): JSX.Element[] {
-        return tasks.map((task, index) => 
-            <Task task={task} onToggleComplete={this.toggleTaskComplete} index={index} key={index}></Task>
+        return tasks.map((task, index) =>
+            <Task task={task} onToggleComplete={this.toggleTaskComplete} index={index} key={index}/>
         )
     }
 

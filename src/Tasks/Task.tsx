@@ -9,17 +9,17 @@ interface TaskProps {
 
 export default class Task extends React.Component<TaskProps> {
     constructor(props: TaskProps) {
-        super(props);
+        super(props)
 
         this.toggleComplete = this.toggleComplete.bind(this);
     }
 
     complete (isComplete: boolean): JSX.Element {
         if (isComplete) {
-            return <span className="task-status complete" onClick={this.toggleComplete()}>✔</span>
+            return <span className="task-status complete" onClick={this.toggleComplete}>✔</span>
         }
 
-        return <span className="task-status incomplete" onClick={this.toggleComplete()}>✘</span>
+        return <span className="task-status incomplete" onClick={this.toggleComplete}>✘</span>
     }
 
     toggleComplete () {
