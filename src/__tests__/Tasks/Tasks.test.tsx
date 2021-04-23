@@ -3,7 +3,6 @@ import { render, fireEvent } from '@testing-library/react';
 
 import Tasks from '../../Tasks/Tasks'
 import TaskInterface from '../../Tasks/TaskInterface'
-import Task from '../../Tasks/Task';
 
 describe('<Tasks />', () => {
     test('Should have a list of four tasks', async () => {

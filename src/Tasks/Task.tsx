@@ -23,10 +23,10 @@ export default class Task extends React.Component<TaskProps> {
     }
 
     toggleComplete () {
-        return this.props.onToggleComplete(this.props.index)
+        this.props.onToggleComplete(this.props.index)
     }
 
     render (): JSX.Element {
-        return <li className="task">{this.complete(this.props.task.isComplete)} {this.props.task.name}</li>
+        return <li className="task">{this.complete(this.props.task.isComplete)} <span className="task-name">{this.props.task.name}</span></li>
     }
 }

@@ -49,10 +49,22 @@ export default class Tasks extends React.Component<any, TasksState> {
         }, 0)
     }
 
-    toggleTaskComplete (index: number) {
-        this.setState(state => {
-            state.tasks[index].isComplete = !state.tasks[index].isComplete
+    toggleTaskComplete (index: number): void {
+        const targetState = !this.state.tasks[index].isComplete
+
+        this.setState((state) => {
+            state.tasks[index].isComplete = targetState
+            return state
         })
+    }
+
+    allTasksDone (): JSX.Element|null {
+        if (this.completedTaskCount() === this.state.tasks.length) {
+            return (
+                <p>Congratulations! You've completed all your tasks! 🎉</p>
+            )
+        }
+        return null
     }
 
     render () {
@@ -60,6 +72,7 @@ export default class Tasks extends React.Component<any, TasksState> {
             <div id="tasks">
                 <h1>Task list</h1>
                 <p>{this.completedTaskCount()} completed</p>
+                {this.allTasksDone()}
                 <ul>
                     {this.buildTaskList(this.state.tasks)}
                 </ul>
