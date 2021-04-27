@@ -7,26 +7,18 @@ interface TaskProps {
     index: Number
 }
 
-export default class Task extends React.Component<TaskProps> {
-  constructor (props: TaskProps) {
-    super(props)
-
-    this.toggleComplete = this.toggleComplete.bind(this)
+export const Task = function (props: TaskProps) {
+  function toggleComplete () {
+    props.onToggleComplete(props.index)
   }
 
-  complete (isComplete: boolean): JSX.Element {
+  function complete (isComplete: boolean): JSX.Element {
     if (isComplete) {
-      return <span className="task-status complete" onClick={this.toggleComplete}>✔</span>
+      return <span className="task-status complete" onClick={toggleComplete}>✔</span>
     }
 
-    return <span className="task-status incomplete" onClick={this.toggleComplete}>✘</span>
+    return <span className="task-status incomplete" onClick={toggleComplete}>✘</span>
   }
 
-  toggleComplete () {
-    this.props.onToggleComplete(this.props.index)
-  }
-
-  render (): JSX.Element {
-    return <li className="task">{this.complete(this.props.task.isComplete)} <span className="task-name">{this.props.task.name}</span></li>
-  }
+  return <li className="task">{complete(props.task.isComplete)} <span className="task-name">{props.task.name}</span></li>
 }
