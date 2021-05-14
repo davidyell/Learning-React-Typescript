@@ -23,11 +23,10 @@ export const Tasks = function () {
   ])
 
   function toggleTaskComplete (index: number): void {
-    // const newState = tasks
-    // newState[index].isComplete = !newState[index].isComplete
+    const newState = [...tasks]
+    newState[index].isComplete = !newState[index].isComplete
 
-    // TODO: How to use existing state to create a new state?
-    setTasks(tasks => tasks[index].isComplete = !tasks[index].isComplete)
+    setTasks(newState)
   }
 
   function buildTaskList (tasks: TaskInterface[]): JSX.Element[] {

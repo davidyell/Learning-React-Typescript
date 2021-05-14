@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Tasks from './Tasks/Tasks'
+import { Tasks } from './Tasks/Tasks'
 import reportWebVitals from './reportWebVitals'
 
 ReactDOM.render(
